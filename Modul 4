@@ -1,0 +1,142 @@
+1. Jelaskan yang dimaksud Functions dalam bahasa Dart!
+Jawab : functions adalah blok kode yang dapat dipanggil untuk melakukan tugas tertentu
+
+2. jelaskan jenis-jenis parameter di Functions beserta contoh sintaksnya!
+Jawab : 
+  a. Positional Parameters: Parameter yang harus diisi dalam urutan tertentu.
+      Contoh sintaks:
+      void greet(String name, int age) {
+        print('Hello, $name. You are $age years old.');
+      }
+      
+      void main() {
+        greet('Alice', 30); // Positional parameters harus diisi dalam urutan yang benar
+      }
+
+  b. Optional Positional Parameters: Parameter opsional yang diletakkan dalam tanda kurung siku [].
+      Contoh sintaks:
+      void greet(String name, [int age = 25]) {
+        print('Hello, $name. You are $age years old.');
+      }
+      
+      void main() {
+        greet('Alice');       // Output: Hello, Alice. You are 25 years old.
+        greet('Bob', 30);    // Output: Hello, Bob. You are 30 years old.
+      }
+  
+  c. Named Parameters: Parameter yang diberi nama dan dapat diisi dalam urutan yang tidak tergantung pada deklarasi fungsi.
+      Contoh sintaks
+      void greet({required String name, int age = 25}) {
+        print('Hello, $name. You are $age years old.');
+      }
+      
+      void main() {
+        greet(name: 'Alice');         // Output: Hello, Alice. You are 25 years old.
+        greet(age: 30, name: 'Bob');  // Output: Hello, Bob. You are 30 years old.
+      }
+  
+  d. Required Parameters: Parameter yang wajib diisi dalam fungsi yang menggunakan named parameters.
+      Contoh sintaks: 
+      void greet({required String name, int age = 25}) {
+        print('Hello, $name. You are $age years old.');
+      }
+      
+      void main() {
+        greet(name: 'Alice');         // Output: Hello, Alice. You are 25 years old.
+        greet(age: 30);              //  Output: : Required named parameter 'name' must be provided.
+      }
+  
+  e. Function as Parameter: Mengirimkan fungsi sebagai parameter ke fungsi lain.
+      Contoh sintaks:
+      void performOperation(int a, int b, Function(int, int) operation) {
+        var result = operation(a, b);
+        print('Result: $result');
+      }
+      
+      int add(int x, int y) {
+        return x + y;
+      }
+
+      void main() {
+        performOperation(5, 3, add); // Output: Result: 8
+      }
+
+3. Jelaskan maksud Functions sebagai first-class objects beserta contoh sintaknya!
+Jawab : Di Dart, functions adalah first-class objects, yang berarti fungsi dapat diperlakukan 
+seperti objek lain dengan cara yang fleksibel. Fungsi dapat disimpan dalam variabel, 
+diteruskan sebagai argumen ke fungsi lain, dikembalikan dari fungsi lain, 
+dan disimpan dalam struktur data seperti list atau map
+Contoh sintaks:
+void main() {
+  // Mendefinisikan fungsi
+  int add(int a, int b) {
+    return a + b;
+  }
+
+  // Menyimpan fungsi dalam variabel
+  var operation = add;
+
+  // Memanggil fungsi melalui variabel
+  print(operation(3, 4)); // Output: 7
+}
+
+
+4. Apa itu Anonymous Functions? Jelaskan dan berikan contohnya!
+Jawab : Anonymous functions atau fungsi anonim adalah fungsi yang tidak memiliki 
+nama dan didefinisikan langsung di tempat di mana mereka akan digunakan.
+Contoh sintaks:
+      void performOperation(int a, int b, Function(int, int) operation) {
+        var result = operation(a, b);
+        print('Result: $result');
+      }
+      
+      void main() {
+        performOperation(5, 3, (x, y) => x - y); // Output: Result: 2
+      }
+5. Jelaskan perbedaan Lexical scope dan Lexical closures! Berikan contohnya!
+Jawab : Lexical Scope mengontrol visibilitas dan aksesibilitas variabel berdasarkan lokasi deklarasi mereka dalam kode.
+contoh sintaks 
+void main() {
+  var x = 10; // Variabel x dideklarasikan di sini
+
+  void innerFunction() {
+    print(x); // Akses variabel x dari scope luar
+  }
+
+  innerFunction(); // Output: 10
+}
+
+Lexical Closures memungkinkan fungsi untuk mengakses variabel dari lingkungan di mana fungsi didefinisikan, bahkan setelah lingkungan tersebut selesai.
+contoh sintaks
+Function makeCounter() {
+  var count = 0; // Variabel count dideklarasikan di sini
+
+  // Fungsi ini adalah closure karena "menutup" variabel count
+  return () {
+    count++;
+    return count;
+  };
+}
+
+void main() {
+  var counter = makeCounter(); // Membuat instance closure
+
+  print(counter()); // Output: 1
+  print(counter()); // Output: 2
+}
+
+6. Jelaskan dengan contoh cara membuat return multiple value di Functions!
+Jawab : Di Dart, return multiple values dari sebuah fungsi dapat dilakukan dengan menggunakan beberapa teknik. 
+Dart menggunakan List, Map, atau membuat kelas khusus untuk menampung beberapa nilai.
+contoh sintask:
+List<dynamic> getPersonInfo() {
+  String name = "Alice";
+  int age = 30;
+  return [name, age];
+}
+
+void main() {
+  var info = getPersonInfo();
+  print('Name: ${info[0]}, Age: ${info[1]}'); // Output: Name: Alice, Age: 30
+}
+
