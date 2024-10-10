@@ -1,8 +1,8 @@
 # belanja
 
 Hasil Praktikum 5
-![Screenshot Hasil Praktikum 5 homepage](assets\praktikum5b1.png)
-![Screenshot Hasil Praktikum 5 itempage](assets\praktikum5b2.png)
+![Screenshot Hasil Praktikum 5 homepage](assets/praktikum5b1.png)
+![Screenshot Hasil Praktikum 5 itempage](assets/praktikum5b2.png)
 
 Hasil Tugas 2
 ![Screenshot Tugas 2](assets/tugas2.png)
