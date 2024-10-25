@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:master_plan/models/plan.dart';
+import 'package:master_plan/provider/plan_provider.dart';
 import 'package:master_plan/views/plan_screen.dart';
 
 void main() {
@@ -17,7 +19,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.purple),
-      home: PlanScreen(),
+      home: PlanProvider(
+        notifier: ValueNotifier<Plan>(const Plan()),
+        child: const PlanScreen(),
+      ),
     );
   }
 }
