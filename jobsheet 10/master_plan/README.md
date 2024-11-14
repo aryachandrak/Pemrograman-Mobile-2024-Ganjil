@@ -9,3 +9,7 @@ Tampilan hasil praktikum 1
 Tugas Praktikum 2: InheritedWidget
 
 ![Hasil Praktikum 2](assets/praktikum2.gif)
+
+Tugas Praktikum 3: State di Multiple Screens
+
+![Hasil Praktikum 3](assets/praktikum3.gif)
