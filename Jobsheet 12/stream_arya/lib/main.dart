@@ -29,12 +29,24 @@ class _StreamHomePageState extends State<StreamHomePage> {
   Color bgColor = Colors.blueGrey;
   late ColorStream colorStream;
 
+  //Soal 5
+  //listen: Asinkron secara paralel; melanjutkan eksekusi program tanpa menunggu
+  //stream selesai.
+  //await for: Asinkron secara berurutan; menunggu setiap elemen
+  //selesai diproses sebelum melanjutkan ke elemen berikutnya atau kode
+  //berikutnya.
   void changeColor() async {
-    await for (var eventColor in colorStream.getColors()) {
+    colorStream.getColors().listen((eventColor) {
       setState(() {
         bgColor = eventColor;
       });
-    }
+    });
+
+    // await for (var eventColor in colorStream.getColors()) {
+    //   setState(() {
+    //     bgColor = eventColor;
+    //   });
+    // }
   }
 
   @override
