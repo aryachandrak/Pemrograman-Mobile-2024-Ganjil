@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:async/async.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity),
-      home: const NavigationDialogScreen(),
+      home: const FuturePage(),
     );
   }
 }
@@ -35,6 +36,31 @@ class FuturePage extends StatefulWidget {
 
 class _FuturePageState extends State<FuturePage> {
   String result = '';
+  int appCounter = 0;
+
+  Future readAndWritePreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    appCounter = prefs.getInt('appCounter') ?? 0;
+    appCounter++;
+    await prefs.setInt('appCounter', appCounter);
+    setState(() {
+      appCounter = appCounter;
+    });
+  }
+
+  Future deletePreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    setState(() {
+      appCounter = 0;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    readAndWritePreference();
+  }
 
   Future<Response> getData() async {
     const authority = 'www.googleapis.com';
@@ -132,49 +158,56 @@ class _FuturePageState extends State<FuturePage> {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Spacer(),
+            Text('You have opened the app $appCounter times.'),
             ElevatedButton(
                 onPressed: () {
-                  handleError();
-
-                  // returnError().then((value) {
-                  //   setState(() {
-                  //     result = 'Succes';
-                  //   });
-                  // }).catchError((onError) {
-                  //   setState(() {
-                  //     result = onError.toString();
-                  //   });
-                  // }).whenComplete(() => print('Complete'));
-
-                  // returnFG();
-
-                  // getNumber().then((value) {
-                  //   setState(() {
-                  //     result = value.toString();
-                  //   });
-                  // }).catchError((e) {
-                  //   result = 'An error occured';
-                  // });
-
-                  // count();
-
-                  // setState(() {});
-                  // getData().then((value) {
-                  //   result = value.body.toString().substring(0, 450);
-                  //   setState(() {});
-                  // }).catchError((_) {
-                  //   result = 'An error occured';
-                  //   setState(() {});
-                  // });
+                  deletePreference();
                 },
-                child: const Text("Go!")),
-            const Spacer(),
-            Text(result),
-            const Spacer(),
-            const CircularProgressIndicator(),
-            const Spacer(),
+                child: Text('reset counter'))
+            // Spacer(),
+            // ElevatedButton(
+            //     onPressed: () {
+            //       handleError();
+
+            // returnError().then((value) {
+            //   setState(() {
+            //     result = 'Succes';
+            //   });
+            // }).catchError((onError) {
+            //   setState(() {
+            //     result = onError.toString();
+            //   });
+            // }).whenComplete(() => print('Complete'));
+
+            // returnFG();
+
+            // getNumber().then((value) {
+            //   setState(() {
+            //     result = value.toString();
+            //   });
+            // }).catchError((e) {
+            //   result = 'An error occured';
+            // });
+
+            // count();
+
+            // setState(() {});
+            // getData().then((value) {
+            //   result = value.body.toString().substring(0, 450);
+            //   setState(() {});
+            // }).catchError((_) {
+            //   result = 'An error occured';
+            //   setState(() {});
+            // });
+            // },
+            //     child: const Text("Go!")),
+            // const Spacer(),
+            // Text(result),
+            // const Spacer(),
+            // const CircularProgressIndicator(),
+            // const Spacer(),
           ],
         ),
       ),
