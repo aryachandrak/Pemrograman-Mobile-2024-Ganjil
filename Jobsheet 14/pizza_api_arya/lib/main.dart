@@ -56,6 +56,14 @@ class _HomepageState extends State<Homepage> {
                     subtitle: Text(snapshot.data![position].description! +
                         '- € ' +
                         snapshot.data![position].price!.toString()),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PizzaDetailScreen(
+                                  pizza: snapshot.data![position],
+                                  isNew: false)));
+                    },
                   );
                 });
           }),
@@ -64,7 +72,10 @@ class _HomepageState extends State<Homepage> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const PizzaDetailScreen()));
+                  builder: (context) => PizzaDetailScreen(
+                        pizza: Pizza(),
+                        isNew: true,
+                      )));
         },
         child: const Icon(Icons.add),
       ),
