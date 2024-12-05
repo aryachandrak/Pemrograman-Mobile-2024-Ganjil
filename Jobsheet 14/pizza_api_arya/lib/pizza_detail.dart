@@ -124,7 +124,7 @@ class _PizzaDetailScreenState extends State<PizzaDetailScreen> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    putPizza();
+                    savePizza();
                   },
                   child: const Text('Send Post'))
             ],
